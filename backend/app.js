@@ -1,6 +1,7 @@
 const express = require('express');     // Besoin d'express
 const mongoose = require('mongoose');   // Importer mongosse
 const app = express();      // Création de notre application express
+const saucesRoutes = require('./routes/sauces');  // Importer le router des sauces
 
 // const userRoutes = require('./routes/user');    // Importer le routeur des utilisateurs
 
@@ -21,14 +22,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.json());    // Extraire le corps JSON pour gérer requête POST
+app.use(express.json());    // Extraire le corps JSON / donne accès au corps de la requête
 
-
-
-
-
-
-
+app.use('/api/sauces', saucesRoutes);
 
 // app.use('/api/auth', userRoutes);     // Enregistrer les routes
 
