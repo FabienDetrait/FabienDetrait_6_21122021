@@ -1,3 +1,4 @@
+const { resource } = require('../app');
 const sauce = require('../models/sauces');  // Importer notre Schéma de données des sauces
 
 exports.createSauce = (req, res, next) => {
@@ -29,8 +30,21 @@ exports.modifySauce = (req, res, next) => {
 }
 
 exports.deleteSauce = (req, res, next) => {
+    sauce.findOne({ _id: req.params.id })
+        .then((Sauce) => {
+            if (!Sauce) {
+                res.status(404).json({ error: new Error('Plus de sauce!') });
+            }
+            if (Sauce.userId !== req.auth.userId) {
+                resource.status(400).json({ error: new Error('Requête non authorisée') });
+            }
+        })
     sauce.deleteOne({ _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Sauce modifiée !'}))
-        .catch(error => res.status(400).json({ error }));
+        .then(() => { res.status(200).json({ message: 'Sauce supprimée !'})})
+        .catch((error) => { res.status(400).json({ error })});
 };
+
+
+
+
 

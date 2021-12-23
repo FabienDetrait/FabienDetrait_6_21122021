@@ -2,8 +2,7 @@ const express = require('express');     // Besoin d'express
 const mongoose = require('mongoose');   // Importer mongosse
 const app = express();      // Création de notre application express
 const saucesRoutes = require('./routes/sauces');  // Importer le router des sauces
-
-// const userRoutes = require('./routes/user');    // Importer le routeur des utilisateurs
+const userRoutes = require('./routes/user');  // Importer le router des users
 
 require('dotenv').config();   // Sécuriser les données sensibles
 
@@ -24,8 +23,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());    // Extraire le corps JSON / donne accès au corps de la requête
 
-app.use('/api/sauces', saucesRoutes);
-
-// app.use('/api/auth', userRoutes);     // Enregistrer les routes
+app.use('/api/sauces', saucesRoutes); // Enregistrer les sauces
+app.use('/api/auth', userRoutes); // Enregistrer les routes
 
 module.exports = app;   // Exporter notre application
