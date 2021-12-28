@@ -1,5 +1,6 @@
 const express = require('express');     // Besoin d'express
 const mongoose = require('mongoose');   // Importer mongosse
+const path = require('path');   // Importer path
 const app = express();      // Création de notre application express
 const saucesRoutes = require('./routes/sauces');  // Importer le router des sauces
 const userRoutes = require('./routes/user');  // Importer le router des users
@@ -22,6 +23,8 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());    // Extraire le corps JSON / donne accès au corps de la requête
+
+app.use('/images', express.static(path.join(__dirname, 'images'))); 
 
 app.use('/api/sauces', saucesRoutes); // Enregistrer les sauces
 app.use('/api/auth', userRoutes); // Enregistrer les routes
