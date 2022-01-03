@@ -11,5 +11,6 @@ router.get('/', auth, ctrlSauce.getAllSauces)
 router.get('/:id', auth, ctrlSauce.getOneSauce)
 router.put('/:id', auth, multer, ctrlSauce.modifySauce)
 router.delete('/:id', auth, ctrlSauce.deleteSauce)
+router.post('/:id/like', auth, ctrlSauce.likesDislikes)
 
 module.exports = router;    // Exporter le router
