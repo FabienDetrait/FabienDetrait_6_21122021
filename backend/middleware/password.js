@@ -1,4 +1,4 @@
-const passwordSchema = require('../models/password');
+const passwordSchema = require('../models/password');   // Importer Schéma du password
 
 module.exports = (req, res, next) => {
     if (!passwordSchema.validate(req.body.password)) {
